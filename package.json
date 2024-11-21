@@ -1,0 +1,67 @@
+{
+  "name": "@hnine-dev/design-system-lit",
+  "private": false,
+  "version": "0.0.6",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "hnine",
+    "design-system",
+    "components",
+    "lit"
+  ],
+  "scripts": {
+    "dev": "yarn run storybook",
+    "build": "tsc -b && vite build -- --report",
+    "lint": "eslint src --ext ts,js,html --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest run --passWithNoTests",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:unit:watch": "vitest --passWithNoTests",
+    "test:unit:ui": "vitest --ui --passWithNoTests",
+    "test:a11y": "yarn build-storybook && axe-storybook",
+    "version-update": "yarn version --no-git-tag-version --no-commit-hooks --new-version",
+    "postversion": "git commit package.json -m \"Update version of $npm_package_name to v$npm_package_version\" && git tag npm/lit/v$npm_package_version",
+    "prepublishOnly": "vite build"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "lit": "^3.2.0"
+  },
+  "devDependencies": {
+    "@hnine-dev/design-system-common": "./hnine-dev-design-system-common-v0.0.0.tgz",
+    "@hnine-dev/eslint-config": "./hnine-dev-eslint-config-v0.0.1.tgz",
+    "@hnine-dev/typescript-config": "./hnine-dev-typescript-config-v0.0.1.tgz",
+    "@types/eslint": "^9",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/ui": "^2.0.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-lit": "^1.14.0",
+    "eslint-plugin-no-unsanitized": "^4.0.2",
+    "glob": "^11.0.0",
+    "jsdom": "^25.0.0",
+    "sass-embedded": "^1.81.0",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.18.0",
+    "vite": "^5.4.2",
+    "vite-plugin-dts": "^4.0.0-beta.2",
+    "vite-plugin-lib-inject-css": "^2.1.1",
+    "vite-plugin-lit-css": "^1.0.2",
+    "vite-plugin-static-copy": "^1.0.6",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^2.0.5"
+  },
+  "peerDependencies": {
+    "lit": "^3.2.0"
+  },
+  "main": "./dist/components/index.js",
+  "types": "./dist/components/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": "./dist/components/index.js",
+    "./tag": "./dist/components/tag/index.js",
+    "./types": "./dist/components/index.d.ts"
+  }
+}
