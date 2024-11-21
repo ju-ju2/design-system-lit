@@ -1,0 +1,40 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main # main 브랜치에 푸시될 때 빌드 트리거
+  pull_request: # PR 생성 시에도 빌드 확인
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 저장소 체크아웃
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Node.js 설정
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # 프로젝트 Node.js 버전
+
+      # 3. 종속성 설치
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. 빌드 실행
+      - name: Build Project
+        run: npm run build
+
+      # 5. 아티팩트 업로드
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
